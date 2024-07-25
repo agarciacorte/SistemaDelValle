@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace SistemaDelValle
 {
-    public partial class Form1 : Form
+    public partial class FormPanelAlumnos : Form
     {
-        public Form1()
+        public FormPanelAlumnos()
         {
             InitializeComponent();
         }
