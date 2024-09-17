@@ -55,7 +55,7 @@ const NavBar = () => {
                 Ventas
               </a>
               <ul className="dropdown-menu" aria-labelledby="ventasDropdown">
-                <li><a className="dropdown-item disabled" href="#">Caja</a></li>
+                <li><a className="dropdown-item" href="/caja">Caja</a></li>
                 <li><a className="dropdown-item disabled" href="#">Registro</a></li>
                 <li><a className="dropdown-item disabled" href="#">Productos</a></li>
               </ul>
@@ -67,7 +67,7 @@ const NavBar = () => {
               <ul className="dropdown-menu" aria-labelledby="adminDropdown">
                 <li><a className="dropdown-item disabled" href="#">Estadisticas</a></li>
                 <li><a className="dropdown-item disabled" href="#">Actividad</a></li>
-                <li><a className="dropdown-item disabled" href="#">Usuarios</a></li>
+                <li><a className="dropdown-item" href="/registrar-usuario">Usuarios</a></li>
               </ul>
             </li>
           </ul>

@@ -59,6 +59,48 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
+// Endpoint para registrar usuario
+app.post('/api/registrar-usuario', async (req, res) => {
+  const { 
+    nombreUsuario, contraseña, nombre, apaterno, amaterno,
+    accesoAlumnos, crearAlumnos, editarAlumnos, eliminarAlumnos,
+    accesoPagos, crearPagos, editarPagos, eliminarPagos,
+    accesoItems, crearItems, editarItems, eliminarItems,
+    accesoReportes, accesoConfiguracion, accesoAuditoria,
+    exportarDatos, enviarCorreos, enviarMensajes, gestionarUsuarios
+  } = req.body;
+
+  try {
+    const connection = await pool.getConnection();
+
+    // Llamada al procedimiento almacenado sin parámetros de salida
+    await connection.query(
+      `CALL CrearUsuario(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [
+        nombreUsuario, contraseña, nombre, apaterno, amaterno,
+        accesoAlumnos, crearAlumnos, editarAlumnos, eliminarAlumnos,
+        accesoPagos, crearPagos, editarPagos, eliminarPagos,
+        accesoItems, crearItems, editarItems, eliminarItems,
+        accesoReportes, accesoConfiguracion, accesoAuditoria,
+        exportarDatos, enviarCorreos, enviarMensajes, gestionarUsuarios
+      ]
+    );
+
+    connection.release();
+
+    // Asumimos que la operación fue exitosa si no hubo errores
+    res.status(201).json({ mensaje: 'Usuario registrado exitosamente' });
+
+  } catch (e) {
+    // Manejo de errores
+    if (e.code === 'ER_SIGNAL_EXCEPTION') {
+      res.status(400).json({ error: e.sqlMessage }); // Error de señal (e.g., 'El nombre de usuario ya existe')
+    } else {
+      res.status(500).json({ error: e.message });
+    }
+  }
+});
+
 const authenticateToken = (req, res, next) => {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
