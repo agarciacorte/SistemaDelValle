@@ -1,0 +1,9 @@
+# Ignorar node_modules
+client/node_modules
+server/node_modules
+
+# Ignorar archivos de build
+client/build/
+
+# Ignorar archivos de entorno
+.env
